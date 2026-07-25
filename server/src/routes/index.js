@@ -1,12 +1,14 @@
 const express = require("express");
-
 const router = express.Router();
 
+const testRoutes = require("./test");
+
+router.use("/test", testRoutes);
+
 router.get("/health", (req, res) => {
-    res.status(200).json({
+    res.json({
         success: true,
-        message: "API is running",
-        timestamp: new Date().toISOString()
+        message: "API is running"
     });
 });
 
