@@ -3,25 +3,29 @@ const router = express.Router();
 
 const pool = require("../config/database");
 
-router.get("/test/db", async (req, res) => {
+
+// Get all products
+router.get("/", async (req, res) => {
     try {
-        const [result] = await pool.query(
-            "SELECT CURRENT_TIME() AS db_time"
+
+        const [products] = await pool.query(
+            "SELECT * FROM products"
         );
 
         res.json({
             success: true,
-            result
+            products
         });
 
-    } catch (error) {
-        console.error(error);
+    } catch(error) {
 
         res.status(500).json({
-            success: false,
-            message: error.message
+            success:false,
+            message:error.message
         });
+
     }
 });
+
 
 module.exports = router;
