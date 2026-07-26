@@ -72,7 +72,8 @@ function ProductCard() {
                                             src={product.image ? `/uploads/${product.image}` : "https://via.placeholder.com/300x200?text=Fresh+Product"}
                                             alt={product.name}
                                             onError={(e) => {
-                                                e.target.src = "https://via.placeholder.com/300x200?text=Fresh+Product";
+                                                console.log("Image failed:", e.target.src);
+                                                e.target.src = "/no-image.png";
                                             }}
                                             className="w-full h-full object-fit group-hover:scale-105 transition-transform duration-500 ease-out"
                                         />

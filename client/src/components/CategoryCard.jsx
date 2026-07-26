@@ -63,7 +63,8 @@ function CategoryCard() {
                                     }
                                     alt={category.name}
                                     onError={(e) => {
-                                        e.target.src = "https://via.placeholder.com/150?text=Category";
+                                        console.log("Image failed:", e.target.src);
+                                        e.target.src = "/no-image.png";
                                     }}
                                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-out"
                                 />
