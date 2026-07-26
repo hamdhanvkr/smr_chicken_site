@@ -29,10 +29,12 @@ app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
 
 // React build
-app.use(express.static(path.join(__dirname, "../dist")));
+const clientBuildPath = path.join(__dirname, "../dist");
+
+app.use(express.static(clientBuildPath));
 
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../dist/index.html"));
+    res.sendFile(path.join(clientBuildPath, "index.html"));
 });
 
 module.exports = app;
