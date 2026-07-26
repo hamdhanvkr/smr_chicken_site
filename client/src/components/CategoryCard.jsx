@@ -1,26 +1,29 @@
 import { useEffect, useState } from "react";
+import api from "../services/axios";
 
 function CategoryCard() {
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/categories")
-            .then((res) => res.json())
-            .then((data) => {
-                setCategories(data);
+        async function fetchCategories() {
+            try {
+                const res = await api.get("/categories");
+                setCategories(res.data);
+            } catch (error) {
+                console.log(error);
+            } finally {
                 setLoading(false);
-            })
-            .catch((err) => {
-                console.error("Error fetching categories:", err);
-                setLoading(false);
-            });
+            }
+        }
+
+        fetchCategories();
     }, []);
 
     return (
         /* WRAPPER DIV ADDED HERE TO CONTROL MARGIN & SIDE PADDING */
         <div className="mx-auto px-4 sm:px-6 lg:px-8 my-8">
-            
+
             {loading ? (
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-6">
                     {[...Array(5)].map((_, index) => (
@@ -40,10 +43,22 @@ function CategoryCard() {
                             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-0 h-1 bg-red-600 rounded-b-full group-hover:w-12 transition-all duration-300" />
 
                             <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden bg-slate-100 mb-3 border-2 border-slate-100 group-hover:border-red-200 transition-colors shadow-inner">
-                                <img
+                                {/* <img
                                     src={
                                         category.image
                                             ? `http://localhost:5000/uploads/${category.image}`
+                                            : ""
+                                    }
+                                    alt={category.name}
+                                    onError={(e) => {
+                                        e.target.src = "https://via.placeholder.com/150?text=Category";
+                                    }}
+                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-out"
+                                /> */}
+                                <img
+                                    src={
+                                        category.image
+                                            ? `/uploads/${category.image}`
                                             : ""
                                     }
                                     alt={category.name}

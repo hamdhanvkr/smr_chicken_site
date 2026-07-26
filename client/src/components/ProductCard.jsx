@@ -1,29 +1,27 @@
 import { useEffect, useState } from "react";
 import { FaWhatsapp } from "react-icons/fa";
+import api from "../services/axios";
 
 function ProductCard() {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
 
     // Business WhatsApp contact number
-    const phoneNumber = "60168050930"; 
+    const phoneNumber = "60168050930";
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/products")
-            .then((res) => res.json())
-            .then((data) => {
-                // Ensure data is an array and slice only the latest 10 items
-                if (Array.isArray(data)) {
-                    setProducts(data.slice(0, 10));
-                } else {
-                    setProducts([]);
-                }
+        async function fetchProducts() {
+            try {
+                const res = await api.get("/products");
+                setProducts(res.data.slice(0, 10));
+            } catch (error) {
+                console.log(error);
+            } finally {
                 setLoading(false);
-            })
-            .catch((err) => {
-                console.error("Error fetching products:", err);
-                setLoading(false);
-            });
+            }
+        }
+
+        fetchProducts();
     }, []);
 
     return (
@@ -62,8 +60,16 @@ function ProductCard() {
                             >
                                 <div>
                                     <div className="relative w-full h-52 overflow-hidden rounded-xl bg-slate-50">
-                                        <img
+                                        {/* <img
                                             src={product.image ? `http://localhost:5000/uploads/${product.image}` : "https://via.placeholder.com/300x200?text=Fresh+Product"}
+                                            alt={product.name}
+                                            onError={(e) => {
+                                                e.target.src = "https://via.placeholder.com/300x200?text=Fresh+Product";
+                                            }}
+                                            className="w-full h-full object-fit group-hover:scale-105 transition-transform duration-500 ease-out"
+                                        /> */}
+                                        <img
+                                            src={product.image ? `/uploads/${product.image}` : "https://via.placeholder.com/300x200?text=Fresh+Product"}
                                             alt={product.name}
                                             onError={(e) => {
                                                 e.target.src = "https://via.placeholder.com/300x200?text=Fresh+Product";
