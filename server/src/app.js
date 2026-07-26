@@ -35,23 +35,21 @@ app.use("/api/orders", orderRoutes);
 // ===========================
 // React Build Paths
 // ===========================
-const clientBuildPath = path.join(__dirname, "../public/client");
-const adminBuildPath = path.join(__dirname, "../public/admin");
+const clientBuildPath = path.join(__dirname, "../public/client/dist");
+const adminBuildPath = path.join(__dirname, "../public/admin/dist");
 
-// Static Files
+// Client
 app.use(express.static(clientBuildPath));
-app.use("/admin", express.static(adminBuildPath));
 
-// ===========================
-// React Routes
-// ===========================
+// Admin
+app.use("/admin", express.static(adminBuildPath));
 
 // Admin React
 app.get("/admin/*", (req, res) => {
     res.sendFile(path.join(adminBuildPath, "index.html"));
 });
 
-// Customer React
+// Client React
 app.get("*", (req, res) => {
     res.sendFile(path.join(clientBuildPath, "index.html"));
 });
