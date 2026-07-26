@@ -18,17 +18,14 @@ function Products() {
         const fetchData = async () => {
             try {
                 const [prodRes, catRes] = await Promise.all([
-                    fetch("http://localhost:5000/api/products"),
-                    fetch("http://localhost:5000/api/categories"),
+                    api.get("/products"),
+                    api.get("/categories"),
                 ]);
 
-                const prodData = await prodRes.json();
-                const catData = await catRes.json();
-
-                setProducts(prodData);
-                setCategories(catData);
+                setProducts(prodRes.data);
+                setCategories(catRes.data);
             } catch (err) {
-                console.error("Error loading products/categories:", err);
+                console.error(err);
             } finally {
                 setLoading(false);
             }
@@ -53,7 +50,7 @@ function Products() {
     return (
         <div className="bg-slate-50 min-h-screen py-10">
             <div className="mx-auto px-4 sm:px-6 lg:px-8">
-                
+
                 {/* PAGE HEADER */}
                 <div className="text-center max-w-2xl mx-auto mb-10">
                     <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
@@ -66,16 +63,15 @@ function Products() {
 
                 {/* CATEGORY FILTER TABS & SEARCH INDICATOR */}
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8">
-                    
+
                     {/* Category Filter Pills */}
                     <div className="flex items-center gap-2 overflow-x-auto w-full sm:w-auto pb-2 sm:pb-0 scrollbar-none">
                         <button
                             onClick={() => setSelectedCategory("All")}
-                            className={`px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all duration-200 ${
-                                selectedCategory === "All"
-                                    ? "bg-red-600 text-white shadow-md shadow-red-600/20"
-                                    : "bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80"
-                            }`}
+                            className={`px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all duration-200 ${selectedCategory === "All"
+                                ? "bg-red-600 text-white shadow-md shadow-red-600/20"
+                                : "bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80"
+                                }`}
                         >
                             All Products
                         </button>
@@ -84,11 +80,10 @@ function Products() {
                             <button
                                 key={category.id}
                                 onClick={() => setSelectedCategory(category.name)}
-                                className={`px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all duration-200 ${
-                                    selectedCategory.toLowerCase() === category.name.toLowerCase()
-                                        ? "bg-red-600 text-white shadow-md shadow-red-600/20"
-                                        : "bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80"
-                                }`}
+                                className={`px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all duration-200 ${selectedCategory.toLowerCase() === category.name.toLowerCase()
+                                    ? "bg-red-600 text-white shadow-md shadow-red-600/20"
+                                    : "bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80"
+                                    }`}
                             >
                                 {category.name}
                             </button>
@@ -152,14 +147,14 @@ function Products() {
                                         {/* Image Container */}
                                         <div className="relative w-full h-52 overflow-hidden rounded-xl bg-slate-50">
                                             <img
-                                                src={`http://localhost:5000/uploads/${product.image}`}
+                                                src={`/uploads/${product.image}`}
                                                 alt={product.name}
                                                 onError={(e) => {
-                                                    e.target.src = "https://via.placeholder.com/300x200?text=Fresh+Product";
+                                                    e.target.src = "/no-image.png";
                                                 }}
                                                 className="w-full h-full object-fit group-hover:scale-105 transition-transform duration-500 ease-out"
                                             />
-                                            
+
                                             {/* <span className="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-red-700 text-xs font-bold px-2.5 py-1 rounded-full border border-red-100 shadow-sm">
                                                 Fresh
                                             </span> */}
