@@ -1,0 +1,42 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import MainLayout from "../layouts/MainLayout";
+
+import Home from "../pages/Home";
+import Products from "../pages/Products";
+import ProductDetails from "../pages/ProductDetails";
+import Category from "../pages/Category";
+import Cart from "../pages/Cart";
+import Checkout from "../pages/Checkout";
+import OrderSuccess from "../pages/OrderSuccess";
+import About from "../pages/About";
+import Contact from "../pages/Contact";
+import NotFound from "../pages/NotFound";
+
+function AppRoutes() {
+    return (
+        <BrowserRouter>
+            <Routes>
+
+                <Route element={<MainLayout />}>
+
+                    <Route path="/" element={<Home />} />
+                    <Route path="/products" element={<Products />} />
+                    <Route path="/products/:id" element={<ProductDetails />} />
+                    <Route path="/category/:id" element={<Category />} />
+                    <Route path="/cart" element={<Cart />} />
+                    <Route path="/checkout" element={<Checkout />} />
+                    <Route path="/order-success" element={<OrderSuccess />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/contact" element={<Contact />} />
+
+                </Route>
+
+                <Route path="*" element={<NotFound />} />
+
+            </Routes>
+        </BrowserRouter>
+    );
+}
+
+export default AppRoutes;
