@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 // Layout
 import AdminLayout from "./layouts/AdminLayout";
@@ -17,27 +17,25 @@ import Users from "./pages/users/Users";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
+    <Routes>
 
-        {/* Public Route */}
-        <Route path="/" element={<Login />} />
+      {/* Public Route */}
+      <Route path="/" element={<Login />} />
 
-        {/* Admin Routes */}
-        <Route element={<AdminLayout />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/categories" element={<Categories />} />
-          <Route path="/categories/add" element={<AddCategory />} />
-          <Route path="/categories/edit/:id" element={<EditCategory />} />
-          <Route path="/products/add" element={<AddProduct />} />
-          <Route path="/products/edit/:id" element={<EditProduct />} />
-          <Route path="/orders" element={<Orders />} />
-          <Route path="/users" element={<Users />} />
-        </Route>
+      {/* Admin Routes */}
+      <Route element={<AdminLayout />}>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/categories" element={<Categories />} />
+        <Route path="/categories/add" element={<AddCategory />} />
+        <Route path="/categories/edit/:id" element={<EditCategory />} />
+        <Route path="/products/add" element={<AddProduct />} />
+        <Route path="/products/edit/:id" element={<EditProduct />} />
+        <Route path="/orders" element={<Orders />} />
+        <Route path="/users" element={<Users />} />
+      </Route>
 
-      </Routes>
-    </BrowserRouter>
+    </Routes>
   );
 }
 

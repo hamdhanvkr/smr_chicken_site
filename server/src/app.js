@@ -14,10 +14,14 @@ app.use(cors({
 
 app.use(express.json());
 
-// Static uploads
+// ===========================
+// Static Uploads
+// ===========================
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
-// Routes
+// ===========================
+// API Routes
+// ===========================
 const adminRoutes = require("./routes/admin");
 const categoryRoutes = require("./routes/category");
 const productRoutes = require("./routes/product");
@@ -28,11 +32,26 @@ app.use("/api/categories", categoryRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
 
-// React build
-const clientBuildPath = path.join(__dirname, "../dist");
+// ===========================
+// React Build Paths
+// ===========================
+const clientBuildPath = path.join(__dirname, "../public/client");
+const adminBuildPath = path.join(__dirname, "../public/admin");
 
+// Static Files
 app.use(express.static(clientBuildPath));
+app.use("/admin", express.static(adminBuildPath));
 
+// ===========================
+// React Routes
+// ===========================
+
+// Admin React
+app.get("/admin/*", (req, res) => {
+    res.sendFile(path.join(adminBuildPath, "index.html"));
+});
+
+// Customer React
 app.get("*", (req, res) => {
     res.sendFile(path.join(clientBuildPath, "index.html"));
 });
