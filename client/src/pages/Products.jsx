@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa";
+import api from "../services/axios";
 
 function Products() {
     const [products, setProducts] = useState([]);
