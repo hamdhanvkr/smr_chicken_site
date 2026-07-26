@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import api from "../services/axios";
+
 import {
     FaArrowRight,
     FaWhatsapp,
@@ -22,20 +24,21 @@ function Hero() {
 
     // Fetch Products from API and limit to the latest 4 products
     useEffect(() => {
-        fetch("http://localhost:5000/api/products")
-            .then((res) => res.json())
-            .then((data) => {
-                if (Array.isArray(data) && data.length > 0) {
-                    // Limit to the latest 4 products
-                    const latestProducts = data.slice(0, 4);
-                    setProducts(latestProducts);
+        async function fetchProducts() {
+            try {
+                const res = await api.get("/products");
+
+                if (Array.isArray(res.data)) {
+                    setProducts(res.data.slice(0, 4));
                 }
+            } catch (err) {
+                console.log(err);
+            } finally {
                 setLoading(false);
-            })
-            .catch((err) => {
-                console.error("Error fetching products for hero slider:", err);
-                setLoading(false);
-            });
+            }
+        }
+
+        fetchProducts();
     }, []);
 
     // Entrance Animation Trigger
@@ -194,10 +197,10 @@ function Hero() {
                                         {/* PRODUCT IMAGE DISPLAY */}
                                         <div className="md:col-span-5 relative w-full h-60 sm:h-64 bg-slate-50 rounded-xl overflow-hidden group shadow-inner border border-slate-200 flex items-center justify-center p-2">
                                             <img
-                                                src={`http://localhost:5000/uploads/${activeProduct?.image}`}
+                                                src={`/uploads/${activeProduct?.image}`}
                                                 alt={activeProduct?.name || "Fresh Product"}
                                                 onError={(e) => {
-                                                    e.target.src = "https://via.placeholder.com/400x400?text=Fresh+Stock";
+                                                   e.target.src = "/no-image.png";
                                                 }}
                                                 className="w-full h-full object-contain transition-all duration-500 ease-out transform group-hover:scale-105"
                                             />
@@ -224,9 +227,8 @@ function Hero() {
                                                     <button
                                                         key={idx}
                                                         onClick={() => setCurrentImgIndex(idx)}
-                                                        className={`h-1.5 rounded-full transition-all flex-shrink-0 ${
-                                                            currentImgIndex === idx ? "w-4 bg-white" : "w-1.5 bg-white/50"
-                                                        }`}
+                                                        className={`h-1.5 rounded-full transition-all flex-shrink-0 ${currentImgIndex === idx ? "w-4 bg-white" : "w-1.5 bg-white/50"
+                                                            }`}
                                                     />
                                                 ))}
                                             </div>
@@ -249,11 +251,10 @@ function Hero() {
                                                             <tr
                                                                 key={product.id || idx}
                                                                 onClick={() => setCurrentImgIndex(idx)}
-                                                                className={`cursor-pointer transition-colors ${
-                                                                    isSelected
+                                                                className={`cursor-pointer transition-colors ${isSelected
                                                                         ? "bg-red-50/90 font-bold"
                                                                         : "hover:bg-slate-50"
-                                                                }`}
+                                                                    }`}
                                                             >
                                                                 <td className="py-2.5 px-2">
                                                                     <div className="flex items-center gap-1.5">
@@ -261,9 +262,8 @@ function Hero() {
                                                                             <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-ping flex-shrink-0" />
                                                                         )}
                                                                         <span
-                                                                            className={`line-clamp-1 ${
-                                                                                isSelected ? "text-red-700" : "text-slate-800"
-                                                                            }`}
+                                                                            className={`line-clamp-1 ${isSelected ? "text-red-700" : "text-slate-800"
+                                                                                }`}
                                                                         >
                                                                             {product.name}
                                                                         </span>
