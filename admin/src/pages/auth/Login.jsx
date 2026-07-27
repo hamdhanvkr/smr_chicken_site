@@ -63,7 +63,7 @@ function Login() {
               className="h-10 w-auto object-contain"
               onError={(e) => {
                 e.target.onerror = null;
-                e.target.src = "https://via.placeholder.com/40?text=SMR";
+                e.target.src = "";
               }}
             />
           </div>

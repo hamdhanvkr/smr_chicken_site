@@ -74,7 +74,7 @@ function Hero() {
     // Helper for generating custom WhatsApp order URL for an individual product
     const getProductWhatsappUrl = (product) => {
         const message = encodeURIComponent(
-            `Hello! I would like to order:\n\n*Product:* ${product.name}\n*Price:* Rs ${product.price}\n\nPlease share payment and delivery details.`
+            `Hello! I would like to order:\n\n*Product:* ${product.name}\n*Price:* RM ${product.price}\n\nPlease share payment and delivery details.`
         );
         return `https://wa.me/${phoneNumber}?text=${message}`;
     };
@@ -97,8 +97,8 @@ function Hero() {
             <div className="relative z-10 w-full px-4 sm:px-8 lg:px-12">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
 
-                    {/* LEFT COLUMN: HERO TEXT & CTAs */}
-                    <div className="text-center lg:text-left space-y-6">
+                    {/* LEFT COLUMN: HERO TEXT & CTAs (ORDER 2 ON MOBILE, ORDER 1 ON DESKTOP) */}
+                    <div className={`order-2 lg:order-1 text-center lg:text-left space-y-6`}>
 
                         {/* Eyebrow Badge */}
                         <div className={`${baseTransition} delay-100 ${animate ? visibleState : hiddenState}`}>
@@ -130,7 +130,7 @@ function Hero() {
                         <div className={`${baseTransition} delay-700 pt-2 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center ${animate ? visibleState : hiddenState}`}>
                             <Link
                                 to="/products"
-                                className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-red-600 hover:bg-red-700 text-white px-8 py-3.5 rounded-xl font-extrabold text-base shadow-lg shadow-red-600/25 transition-all duration-300 hover:scale-[1.02] active:scale-95"
+                                className="group w-60 sm:w-60 inline-flex items-center justify-center gap-3 bg-red-600 hover:bg-red-700 text-white px-8 py-3.5 rounded-xl font-extrabold text-base shadow-lg shadow-red-600/25 transition-all duration-300 hover:scale-[1.02] active:scale-95"
                             >
                                 <span>Browse Products</span>
                                 <FaArrowRight className="text-white/80 group-hover:translate-x-1.5 transition-transform" />
@@ -155,8 +155,8 @@ function Hero() {
 
                     </div>
 
-                    {/* RIGHT COLUMN: DYNAMIC API SLIDER (TOP 4 LATEST PRODUCTS) */}
-                    <div className={`w-full ${baseTransition} delay-500 ${animate ? visibleState : hiddenState}`}>
+                    {/* RIGHT COLUMN: DYNAMIC API SLIDER (ORDER 1 ON MOBILE, ORDER 2 ON DESKTOP) */}
+                    <div className={`order-1 lg:order-2 w-full ${baseTransition} delay-500 ${animate ? visibleState : hiddenState}`}>
                         <div className="w-full">
 
                             {/* Main Display Card */}
@@ -270,7 +270,7 @@ function Hero() {
                                                                     </div>
                                                                 </td>
                                                                 <td className="py-2.5 px-2 font-extrabold text-red-600 whitespace-nowrap">
-                                                                    Rs {product.price}
+                                                                    RM {product.price}
                                                                 </td>
                                                                 <td className="py-2.5 px-2 text-right">
                                                                     <a

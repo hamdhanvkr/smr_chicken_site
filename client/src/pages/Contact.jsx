@@ -6,7 +6,6 @@ import {
   FaMapMarkerAlt,
   FaWhatsapp,
   FaArrowRight,
-  FaClock,
   FaCommentAlt,
 } from "react-icons/fa";
 
@@ -33,17 +32,42 @@ export default function Contact() {
   ];
 
   return (
-    <div className="bg-slate-50 min-h-screen py-10 lg:py-10">
-      <div className="mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+    <section className="relative w-full bg-gradient-to-b from-slate-50 via-red-50/20 to-amber-50/20 text-slate-900 overflow-hidden pt-14 pb-20 min-h-screen">
+      
+      {/* TOP WAVE SEPARATOR (Inverted) */}
+      <div className="absolute top-0 left-0 w-full overflow-hidden leading-none pointer-events-none z-10">
+        <svg
+          className="relative block w-full h-[30px] sm:h-[45px] rotate-180"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1200 120"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V0C49.64,11.39,98.66,28.69,147.8,36.27c66.5,10.23,135,11.69,202.8,2.37Z"
+            className="fill-white"
+          ></path>
+        </svg>
+      </div>
+
+      {/* SUBTLE BACKGROUND GRID PATTERN */}
+      <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
+
+      {/* SOFT AMBIENT LIGHT GLOWS */}
+      <div className="absolute top-1/4 right-10 w-96 h-96 bg-red-200/20 blur-3xl pointer-events-none rounded-full animate-pulse" />
+      <div className="absolute bottom-1/4 left-10 w-96 h-96 bg-amber-200/20 blur-3xl pointer-events-none rounded-full animate-pulse delay-700" />
+
+      {/* MAIN CONTAINER */}
+      <div className="relative z-10 mx-auto px-4 sm:px-6 lg:px-8 space-y-12 my-4 pt-4">
         
         {/* ================= PAGE HEADER ================= */}
         <div className="text-center max-w-2xl mx-auto space-y-3">
-          <span className="inline-flex items-center gap-1.5 text-red-600 font-bold uppercase tracking-wider text-xs bg-red-100/80 px-3.5 py-1 rounded-full border border-red-200/80 shadow-sm">
+          <span className="inline-flex items-center gap-1.5 text-red-600 font-bold uppercase tracking-widest text-xs bg-red-100/80 px-3.5 py-1 rounded-full border border-red-200/80 shadow-sm">
             Get In Touch
           </span>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
             We're Here To <span className="text-red-600">Help</span>
           </h1>
+          <div className="w-16 h-1 bg-red-600 rounded-full mx-auto" />
           <p className="text-slate-600 text-sm sm:text-base leading-relaxed pt-1">
             Whether you are a retail customer or a wholesale buyer, reach out to us for fresh poultry orders, quotes, and general inquiries.
           </p>
@@ -53,7 +77,7 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* LEFT COLUMN: CONTACT INFORMATION */}
-          <div className="lg:col-span-7 bg-white p-6 sm:p-10 rounded-3xl border border-slate-200/80 shadow-xl shadow-slate-200/50 space-y-8">
+          <div className="lg:col-span-7 bg-white/90 backdrop-blur-sm p-6 sm:p-10 rounded-3xl border border-slate-200/80 shadow-xl shadow-slate-200/40 space-y-8">
             <div>
               <h2 className="text-2xl font-extrabold text-slate-900">
                 Contact Details
@@ -66,7 +90,7 @@ export default function Contact() {
             <div className="space-y-4">
               
               {/* Phone Numbers Card */}
-              <div className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50/80 border border-slate-200/60 transition-all hover:bg-slate-50 hover:border-slate-300">
+              <div className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50/80 border border-slate-200/60 transition-all hover:bg-slate-50 hover:border-red-300">
                 <div className="w-12 h-12 bg-red-100 text-red-600 rounded-2xl flex items-center justify-center flex-shrink-0 text-lg shadow-sm">
                   <FaPhoneAlt />
                 </div>
@@ -88,7 +112,7 @@ export default function Contact() {
               </div>
 
               {/* Office Address Card */}
-              <div className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50/80 border border-slate-200/60 transition-all hover:bg-slate-50 hover:border-slate-300">
+              <div className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50/80 border border-slate-200/60 transition-all hover:bg-slate-50 hover:border-red-300">
                 <div className="w-12 h-12 bg-red-100 text-red-600 rounded-2xl flex items-center justify-center flex-shrink-0 text-lg shadow-sm">
                   <FaMapMarkerAlt />
                 </div>
@@ -105,7 +129,7 @@ export default function Contact() {
               </div>
 
               {/* Email Card */}
-              <div className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50/80 border border-slate-200/60 transition-all hover:bg-slate-50 hover:border-slate-300">
+              <div className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50/80 border border-slate-200/60 transition-all hover:bg-slate-50 hover:border-red-300">
                 <div className="w-12 h-12 bg-red-100 text-red-600 rounded-2xl flex items-center justify-center flex-shrink-0 text-lg shadow-sm">
                   <FaEnvelope />
                 </div>
@@ -181,6 +205,21 @@ export default function Contact() {
         </div>
 
       </div>
-    </div>
+
+      {/* BOTTOM WAVE SEPARATOR */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none pointer-events-none z-10">
+        <svg
+          className="relative block w-full h-[30px] sm:h-[45px]"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1200 120"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V0C49.64,11.39,98.66,28.69,147.8,36.27c66.5,10.23,135,11.69,202.8,2.37Z"
+            className="fill-white"
+          ></path>
+        </svg>
+      </div>
+    </section>
   );
 }
