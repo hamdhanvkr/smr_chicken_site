@@ -46,6 +46,12 @@ function Navbar() {
                         <NavLink to="/products" className={getLinkClass}>
                             Products
                         </NavLink>
+                        <NavLink to="/wholesale" className={getLinkClass}>
+                            Wholesale
+                        </NavLink>
+                        <NavLink to="/retail" className={getLinkClass}>
+                            Retail
+                        </NavLink>
                         <NavLink to="/about" className={getLinkClass}>
                             About
                         </NavLink>
@@ -102,6 +108,20 @@ function Navbar() {
                             onClick={closeMenu}
                         >
                             Products
+                        </NavLink>
+                        <NavLink
+                            to="/wholesale"
+                            className={getMobileLinkClass}
+                            onClick={closeMenu}
+                        >
+                            Wholesale
+                        </NavLink>
+                        <NavLink
+                            to="/retail"
+                            className={getMobileLinkClass}
+                            onClick={closeMenu}
+                        >
+                            Retail
                         </NavLink>
                         <NavLink
                             to="/about"

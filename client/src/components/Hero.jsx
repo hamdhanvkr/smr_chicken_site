@@ -95,7 +95,7 @@ function Hero() {
 
             {/* MAIN CONTENT CONTAINER */}
             <div className="relative z-10 w-full px-4 sm:px-8 lg:px-12">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
 
                     {/* LEFT COLUMN: HERO TEXT & CTAs */}
                     <div className="text-center lg:text-left space-y-6">
@@ -112,7 +112,7 @@ function Hero() {
                         </div>
 
                         {/* Main Headline */}
-                        <h1 className={`${baseTransition} delay-300 text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black leading-tight tracking-tight text-slate-900 ${animate ? visibleState : hiddenState}`}>
+                        <h1 className={`${baseTransition} delay-300 text-3xl sm:text-4xl lg:text-4xl xl:text-4xl font-black leading-tight tracking-tight text-slate-900 ${animate ? visibleState : hiddenState}`}>
                             Unmatched{" "}
                             <span className="bg-gradient-to-r from-red-600 via-rose-600 to-amber-600 bg-clip-text text-transparent">
                                 Freshness

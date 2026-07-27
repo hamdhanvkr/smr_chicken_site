@@ -6,6 +6,8 @@ import Home from "../pages/Home";
 import Products from "../pages/Products";
 import ProductDetails from "../pages/ProductDetails";
 import Category from "../pages/Category";
+import Wholesale from "../pages/Wholesale";
+import Retail from "../pages/Retail";
 import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
 import OrderSuccess from "../pages/OrderSuccess";
@@ -27,6 +29,8 @@ function AppRoutes() {
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/checkout" element={<Checkout />} />
                     <Route path="/order-success" element={<OrderSuccess />} />
+                    <Route path="/wholesale" element={<Wholesale />} />
+                    <Route path="/retail" element={<Retail />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/contact" element={<Contact />} />
 
