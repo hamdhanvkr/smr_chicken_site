@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { FaWhatsapp } from "react-icons/fa";
 import api from "../services/axios";
+import { IMAGE_URL } from "../config/config";
+
 
 function ProductCard() {
     const [products, setProducts] = useState([]);
@@ -50,8 +52,8 @@ function ProductCard() {
 
             {/* MAIN CONTAINER */}
             <div className="relative z-10 mx-auto px-4 sm:px-6 lg:px-8 my-4 pt-4">
-              
-            <h2 className="text-3xl font-bold text-center mb-5"> Our Products </h2>
+
+                <h2 className="text-3xl font-bold text-center mb-5"> Our Products </h2>
 
                 {loading ? (
                     /* Skeleton Loader */
@@ -88,8 +90,11 @@ function ProductCard() {
                                     <div>
                                         <div className="relative w-full h-52 overflow-hidden rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center p-2">
                                             <img
-                                                src={product.image ? `/uploads/${product.image}` : "/no-image.png"}
-                                                alt={product.name}
+                                                src={
+                                                    product.image
+                                                        ? `${IMAGE_URL}/${product.image}`
+                                                        : "/no-image.png"
+                                                } alt={product.name}
                                                 onError={(e) => {
                                                     e.target.src = "/no-image.png";
                                                 }}

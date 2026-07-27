@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa";
 import api from "../services/axios";
+import { IMAGE_URL } from "../config/config";
+
 
 function Products() {
     const [products, setProducts] = useState([]);
@@ -163,7 +165,11 @@ function Products() {
                                             {/* Image Container */}
                                             <div className="relative w-full h-52 overflow-hidden rounded-xl bg-slate-50">
                                                 <img
-                                                    src={`/uploads/${product.image}`}
+                                                    src={
+                                                        product.image
+                                                            ? `${IMAGE_URL}/${product.image}`
+                                                            : "/no-image.png"
+                                                    }
                                                     alt={product.name}
                                                     onError={(e) => {
                                                         e.target.src = "/no-image.png";

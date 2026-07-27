@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../services/axios";
+import { IMAGE_URL } from "../config/config";
 
 import {
     FaArrowRight,
@@ -197,7 +198,7 @@ function Hero() {
                                         {/* PRODUCT IMAGE DISPLAY */}
                                         <div className="md:col-span-5 relative w-full h-60 sm:h-64 bg-slate-50 rounded-xl overflow-hidden group shadow-inner border border-slate-200 flex items-center justify-center p-2">
                                             <img
-                                                src={`/uploads/${activeProduct?.image}`}
+                                                src={`${IMAGE_URL}/${activeProduct?.image}`}
                                                 alt={activeProduct?.name || "Fresh Product"}
                                                 onError={(e) => {
                                                    e.target.src = "/no-image.png";

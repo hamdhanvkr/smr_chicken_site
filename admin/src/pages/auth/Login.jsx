@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash, FaSpinner } from "react-icons/fa";
+import logo from "../../assets/smr_logo1.png";
 import api from "../../services/axios";
 
 function Login() {
@@ -58,7 +59,7 @@ function Login() {
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center h-16 w-16 rounded-2xl bg-red-600/10 border border-red-500/20 mb-4">
             <img
-              src="/src/assets/smr_logo1.png"
+              src={logo}
               alt="SMR Chicken Logo"
               className="h-10 w-auto object-contain"
               onError={(e) => {
@@ -93,7 +94,7 @@ function Login() {
               <FaEnvelope className="absolute left-4 text-slate-500 text-sm pointer-events-none" />
               <input
                 type="email"
-                placeholder="admin@smrchicken.com"
+                placeholder="Enter a username"
                 required
                 className="w-full bg-slate-800/60 border border-slate-700/80 focus:border-red-500 focus:ring-1 focus:ring-red-500 text-white placeholder-slate-500 text-sm rounded-xl pl-11 pr-4 py-3.5 outline-none transition-all duration-200"
                 value={email}

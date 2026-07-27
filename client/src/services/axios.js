@@ -1,10 +1,8 @@
 import axios from "axios";
+import { API_URL } from "../config/config";
 
 const api = axios.create({
-    baseURL:
-        window.location.hostname === "localhost"
-            ? "http://localhost:5000/api"
-            : "/api",
+    baseURL: API_URL,
 });
 
 export default api;

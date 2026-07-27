@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../services/axios";
+import { IMAGE_URL } from "../config/config";
 
 function CategoryCard() {
     const [categories, setCategories] = useState([]);
@@ -69,7 +70,7 @@ function CategoryCard() {
                                     <img
                                         src={
                                             category.image
-                                                ? `/uploads/${category.image}`
+                                                ? `${IMAGE_URL}/${category.image}`
                                                 : "/no-image.png"
                                         }
                                         alt={category.name}
