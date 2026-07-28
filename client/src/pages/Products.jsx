@@ -152,7 +152,7 @@ function Products() {
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
                             {filteredProducts.map((product) => {
                                 const whatsappMessage = encodeURIComponent(
-                                    `Hello! I would like to order:\n\n*Product:* ${product.name}\n*Price:* Rs ${product.price}\n\nPlease share payment and delivery details.`
+                                    `Hello! I would like to order:\n\n*Product:* ${product.name}\n*Price:* RM ${product.price}\n\nPlease share payment and delivery details.`
                                 );
                                 const whatsappUrl = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
 
@@ -201,7 +201,7 @@ function Products() {
                                             <div>
                                                 <span className="text-xs text-slate-400 block font-medium">Price</span>
                                                 <p className="text-xl font-extrabold text-slate-900">
-                                                    <span className="text-emerald-600 mr-0.5">Rs</span>
+                                                    <span className="text-emerald-600 mr-0.5">RM</span>
                                                     {product.price}
                                                 </p>
                                             </div>

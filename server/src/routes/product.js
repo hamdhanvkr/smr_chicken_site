@@ -128,50 +128,57 @@ router.post("/", upload.single("image"), async (req, res) => {
 // ===============================
 // Update Product
 // ===============================
-router.put("/:id", upload.single("image"), async (req, res) => {
+router.put("/:id", upload.single("image"), async (req,res)=>{
 
     try {
 
-        const {
-            category_id,
-            name,
-            price,
-            description,
-            status
-        } = req.body;
+        const { category_id, name, price, description, status } = req.body;
 
-        if (req.file) {
+        let image = null;
+
+        if(req.file){
+            image = req.file.filename;
+        }
+
+
+        if(image){
 
             await pool.query(
-                `UPDATE products
-                SET category_id=?,
-                    name=?,
-                    price=?,
-                    image=?,
-                    description=?,
-                    status=?
-                WHERE id=?`,
+                `
+                UPDATE products
+                SET 
+                category_id=?,
+                name=?,
+                price=?,
+                description=?,
+                status=?,
+                image=?
+                WHERE id=?
+                `,
                 [
                     category_id,
                     name,
                     price,
-                    req.file.filename,
                     description,
                     status,
+                    image,
                     req.params.id
                 ]
             );
 
-        } else {
+        }else{
 
             await pool.query(
-                `UPDATE products
-                SET category_id=?,
-                    name=?,
-                    price=?,
-                    description=?,
-                    status=?
-                WHERE id=?`,
+                `
+                UPDATE products
+                SET 
+                category_id=?,
+                name=?,
+                price=?,
+                description=?,
+                status=?
+                WHERE id=?
+                `,
                 [
                     category_id,
                     name,
@@ -184,24 +191,23 @@ router.put("/:id", upload.single("image"), async (req, res) => {
 
         }
 
+
         res.json({
-            success: true,
-            message: "Product Updated Successfully"
+            message:"Product updated"
         });
 
-    } catch (error) {
+
+    } catch(error){
 
         console.log(error);
 
         res.status(500).json({
-            success: false,
-            message: "Server Error"
+            message:"Update failed"
         });
 
     }
 
 });
-
 
 // ===============================
 // Delete Product

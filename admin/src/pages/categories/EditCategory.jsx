@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
+import { IMAGE_URL } from "../../config/config";
 import {
   FaArrowLeft,
   FaEdit,
   FaCloudUploadAlt,
   FaSpinner,
   FaImage,
+  FaCheckCircle,
+  FaExclamationCircle,
+  FaTimes
 } from "react-icons/fa";
 import api from "../../services/axios";
 
@@ -21,6 +25,7 @@ function EditCategory() {
 
   const [fetching, setFetching] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
 
   useEffect(() => {
     fetchCategory();
@@ -42,12 +47,47 @@ function EditCategory() {
     }
   }
 
+  // Handle file selection & preview generation
+  const handleFileSelect = (file) => {
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      alert("Please select a valid image file (PNG, JPG, WEBP).");
+      return;
+    }
+
+    // Clean up previous blob URL to prevent memory leaks
+    if (preview) URL.revokeObjectURL(preview);
+
+    setImage(file);
+    setPreview(URL.createObjectURL(file));
+  };
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    if (file) {
-      setImage(file);
-      setPreview(URL.createObjectURL(file));
-    }
+    handleFileSelect(file);
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = () => {
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    setIsDragging(false);
+    const file = e.dataTransfer.files[0];
+    handleFileSelect(file);
+  };
+
+  const handleClearNewImage = () => {
+    if (preview) URL.revokeObjectURL(preview);
+    setImage(null);
+    setPreview(null);
   };
 
   async function handleSubmit(e) {
@@ -80,152 +120,201 @@ function EditCategory() {
   }
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 bg-slate-900 min-h-screen text-slate-200">
+    <div className="p-4 sm:p-6 lg:p-8 bg-slate-50 min-h-screen text-slate-800 font-sans">
       <div className="max-w-3xl mx-auto space-y-6">
-        
-        {/* HEADER & BACK BUTTON */}
+
+        {/* HEADER & BACK NAVIGATION */}
         <div className="flex items-center justify-between">
           <Link
             to="/categories"
-            className="inline-flex items-center gap-2 text-slate-400 hover:text-white text-sm font-semibold transition-colors"
+            className="inline-flex items-center gap-2.5 text-slate-600 hover:text-slate-900 text-xs sm:text-sm font-semibold bg-white border border-slate-200 px-4 py-2.5 rounded-xl shadow-sm transition-all hover:bg-slate-100"
           >
-            <FaArrowLeft /> Back to Categories
+            <FaArrowLeft className="text-xs text-slate-500" />
+            <span>Back to Categories</span>
           </Link>
         </div>
 
         {/* LOADING STATE */}
         {fetching ? (
-          <div className="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-12 text-center text-slate-400">
-            <FaSpinner className="animate-spin text-3xl text-red-500 mx-auto mb-3" />
-            <p className="text-sm font-medium">Loading category data...</p>
+          <div className="bg-white border border-slate-200/80 rounded-2xl p-12 text-center text-slate-500 shadow-sm">
+            <FaSpinner className="animate-spin text-3xl text-red-600 mx-auto mb-3" />
+            <p className="text-sm font-medium">Loading category details...</p>
           </div>
         ) : (
-          /* FORM CONTAINER */
-          <div className="bg-slate-800/60 border border-slate-700/60 rounded-2xl p-6 sm:p-8 shadow-xl">
-            <div className="flex items-center gap-3 pb-6 mb-6 border-b border-slate-700/60">
-              <div className="p-3 bg-blue-600/10 border border-blue-500/20 text-blue-400 rounded-xl text-xl">
+          /* MAIN FORM CARD */
+          <div className="bg-white border border-slate-200/80 rounded-2xl p-6 sm:p-8 shadow-sm">
+
+            {/* Card Header */}
+            <div className="flex items-center gap-3.5 pb-6 mb-6 border-b border-slate-100">
+              <div className="p-3.5 bg-blue-50 border border-blue-100 text-blue-600 rounded-2xl text-xl sm:text-2xl shrink-0">
                 <FaEdit />
               </div>
               <div>
-                <h1 className="text-xl sm:text-2xl font-bold text-white">
-                  Edit Category <span className="text-slate-400 text-base font-normal">#{id}</span>
+                <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+                  Edit Category <span className="text-slate-400 text-sm font-medium">#{id}</span>
                 </h1>
-                <p className="text-xs sm:text-sm text-slate-400">
-                  Update category details and status
+                <p className="text-xs sm:text-sm text-slate-500 mt-0.5 font-medium">
+                  Update category details, preview image, and publication status
                 </p>
               </div>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
-              
+
               {/* CATEGORY NAME */}
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
-                  Category Name <span className="text-red-500">*</span>
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                  Category Name <span className="text-red-600">*</span>
                 </label>
                 <input
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full bg-slate-900/80 border border-slate-700 text-white placeholder-slate-500 text-sm rounded-xl px-4 py-3 outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-all"
+                  className="w-full bg-slate-50/50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm rounded-xl px-4 py-3.5 outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/20 transition-all"
+                  placeholder="e.g. Whole Leg, Frozen Seafood, Fresh Cuts"
                   required
                 />
               </div>
 
               {/* IMAGE UPLOAD & PREVIEW */}
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
                   Category Image
                 </label>
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-center">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-stretch">
+
                   {/* Dropzone */}
-                  <label className="sm:col-span-2 border-2 border-dashed border-slate-700 hover:border-red-500/60 rounded-xl p-6 flex flex-col items-center justify-center cursor-pointer bg-slate-900/40 hover:bg-slate-900/80 transition-all group">
-                    <FaCloudUploadAlt className="text-3xl text-slate-500 group-hover:text-red-500 mb-2 transition-colors" />
-                    <span className="text-xs font-semibold text-slate-300">
-                      Upload replacement image
-                    </span>
-                    <span className="text-[11px] text-slate-500 mt-1">
-                      Leave blank to keep existing image
-                    </span>
+                  <div
+                    onDragOver={handleDragOver}
+                    onDragLeave={handleDragLeave}
+                    onDrop={handleDrop}
+                    className={`sm:col-span-2 relative border-2 border-dashed rounded-2xl p-6 flex flex-col items-center justify-center cursor-pointer transition-all ${isDragging
+                      ? "border-red-500 bg-red-50"
+                      : "border-slate-200 hover:border-red-400 bg-slate-50/50 hover:bg-slate-100/50"
+                      }`}
+                  >
                     <input
                       type="file"
                       accept="image/*"
                       onChange={handleImageChange}
-                      className="hidden"
+                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                     />
-                  </label>
 
-                  {/* Existing or New Preview */}
-                  <div className="flex flex-col items-center justify-center p-3 bg-slate-900/80 border border-slate-700 rounded-xl h-36 relative">
+                    <div className="p-3 bg-white border border-slate-200 rounded-xl text-slate-500 mb-3 shadow-sm">
+                      <FaCloudUploadAlt className="text-2xl sm:text-3xl text-red-600" />
+                    </div>
+
+                    <p className="text-xs sm:text-sm font-bold text-slate-800 text-center">
+                      Click or drag new image to replace
+                    </p>
+                    <p className="text-[11px] text-slate-400 mt-1 text-center font-medium">
+                      Leave empty to keep existing image
+                    </p>
+                  </div>
+
+                  {/* Existing or New Preview Box */}
+                  <div className="relative bg-slate-50/50 border border-slate-200 rounded-2xl p-3 flex flex-col items-center justify-center min-h-[160px] overflow-hidden">
                     {preview ? (
                       <>
                         <img
                           src={preview}
-                          alt="New Preview"
-                          className="w-full h-full object-cover rounded-lg"
+                          alt="New File Preview"
+                          className="w-full h-32 object-cover rounded-xl border border-slate-200 bg-white"
                         />
-                        <span className="absolute bottom-1 bg-red-600/90 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
-                          New File
-                        </span>
+                        <div className="w-full flex items-center justify-between mt-2 px-1">
+                          <span className="bg-red-50 border border-red-200/80 text-red-600 text-[10px] font-bold px-2 py-0.5 rounded-md">
+                            New Upload
+                          </span>
+                          <button
+                            type="button"
+                            onClick={handleClearNewImage}
+                            className="p-1.5 bg-slate-200/70 hover:bg-red-600 text-slate-600 hover:text-white rounded-lg transition-colors"
+                            title="Revert to current image"
+                          >
+                            <FaTimes className="text-xs" />
+                          </button>
+                        </div>
                       </>
                     ) : oldImage ? (
                       <>
                         <img
-                          src={`/uploads/${oldImage}`}
+                          src={`${IMAGE_URL}/${oldImage}`}
                           alt="Current Category"
-                          className="w-full h-full object-cover rounded-lg"
+                          className="w-full h-32 object-cover rounded-xl border border-slate-200 bg-white"
                           onError={(e) => {
                             e.target.onerror = null;
-                            e.target.src = "https://via.placeholder.com/150?text=No+Img";
+                            e.target.src = "/no-image.png";
                           }}
                         />
-                        <span className="absolute bottom-1 bg-slate-800/90 text-slate-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-slate-700">
-                          Current
-                        </span>
+                        <div className="w-full flex items-center justify-center mt-2">
+                          <span className="bg-slate-100 border border-slate-200 text-slate-600 text-[10px] font-bold px-2.5 py-0.5 rounded-md">
+                            Current Image
+                          </span>
+                        </div>
                       </>
                     ) : (
-                      <div className="flex flex-col items-center text-slate-500 text-xs gap-1">
-                        <FaImage className="text-2xl" />
-                        <span>No Image</span>
+                      <div className="flex flex-col items-center justify-center text-slate-400 gap-2">
+                        <FaImage className="text-3xl text-slate-300" />
+                        <span className="text-xs font-semibold text-slate-400">
+                          No Image Uploaded
+                        </span>
                       </div>
                     )}
                   </div>
+
                 </div>
               </div>
 
-              {/* STATUS SELECT */}
+              {/* STATUS SELECTION */}
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
                   Status
                 </label>
-                <select
-                  value={status}
-                  onChange={(e) => setStatus(e.target.value)}
-                  className="w-full bg-slate-900/80 border border-slate-700 text-white text-sm rounded-xl px-4 py-3 outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-all cursor-pointer"
-                >
-                  <option value="Active">Active</option>
-                  <option value="Inactive">Inactive</option>
-                </select>
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setStatus("Active")}
+                    className={`p-3.5 rounded-xl border text-xs font-bold flex items-center justify-center gap-2 transition-all ${status === "Active"
+                      ? "bg-emerald-50 border-emerald-300 text-emerald-700 ring-2 ring-emerald-500/20"
+                      : "bg-white border-slate-200 text-slate-500 hover:bg-slate-50"
+                      }`}
+                  >
+                    <FaCheckCircle className={status === "Active" ? "text-emerald-600" : "text-slate-400"} />
+                    <span>Active</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setStatus("Inactive")}
+                    className={`p-3.5 rounded-xl border text-xs font-bold flex items-center justify-center gap-2 transition-all ${status === "Inactive"
+                      ? "bg-slate-100 border-slate-300 text-slate-800 ring-2 ring-slate-400/20"
+                      : "bg-white border-slate-200 text-slate-500 hover:bg-slate-50"
+                      }`}
+                  >
+                    <FaExclamationCircle className={status === "Inactive" ? "text-slate-700" : "text-slate-400"} />
+                    <span>Inactive</span>
+                  </button>
+                </div>
               </div>
 
-              {/* SUBMIT BUTTON */}
-              <div className="pt-4 border-t border-slate-700/60 flex justify-end gap-3">
+              {/* FORM FOOTER ACTIONS */}
+              <div className="pt-6 border-t border-slate-100 flex items-center justify-end gap-3">
                 <button
                   type="button"
                   onClick={() => navigate("/categories")}
-                  className="px-5 py-3 rounded-xl border border-slate-700 text-slate-300 hover:bg-slate-700/50 text-sm font-semibold transition-all"
+                  className="px-5 py-3 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-slate-900 text-xs sm:text-sm font-bold transition-all"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-500 disabled:opacity-50 text-white px-6 py-3 rounded-xl font-bold text-sm shadow-lg shadow-red-600/20 transition-all duration-200 active:scale-95"
+                  className="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-xl font-bold text-xs sm:text-sm shadow-md shadow-red-600/20 disabled:opacity-50 transition-all duration-200 active:scale-95"
                 >
                   {submitting ? (
                     <>
-                      <FaSpinner className="animate-spin" />
+                      <FaSpinner className="animate-spin text-xs" />
                       <span>Updating...</span>
                     </>
                   ) : (
