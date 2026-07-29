@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa";
 import api from "../services/axios";
 import { IMAGE_URL } from "../config/config";
+import { Helmet } from "react-helmet-async";
 
 
 function Products() {
@@ -52,6 +53,19 @@ function Products() {
 
     return (
         <section className="relative w-full bg-slate-50 min-h-screen pt-14 pb-10 md:pb-16 overflow-hidden">
+
+            <Helmet>
+                <title>Fresh Chicken Products | SMR Chicken</title>
+
+                <meta
+                    name="description"
+                    content="Browse fresh whole chicken, chicken breast, wings, drumsticks, boneless chicken and frozen seafood from SMR Chicken."
+                />
+
+                <link rel="canonical" href="https://smrchicken.com/products" />
+            </Helmet>
+
+
             {/* TOP WAVE SEPARATOR */}
             <div className="absolute top-0 left-0 w-full overflow-hidden leading-none pointer-events-none z-10">
                 <svg

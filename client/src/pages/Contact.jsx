@@ -1,5 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+
 import {
   FaPhoneAlt,
   FaEnvelope,
@@ -33,7 +35,18 @@ export default function Contact() {
 
   return (
     <section className="relative w-full bg-gradient-to-b from-slate-50 via-red-50/20 to-amber-50/20 text-slate-900 overflow-hidden pt-14 pb-20 min-h-screen">
-      
+
+      <Helmet>
+        <title>Contact SMR Chicken | Wholesale & Retail Orders</title>
+
+        <meta
+          name="description"
+          content="Contact SMR Chicken in Shah Alam for wholesale and retail poultry orders. WhatsApp us for fresh chicken and frozen seafood delivery."
+        />
+
+        <link rel="canonical" href="https://smrchicken.com/contact" />
+      </Helmet>
+
       {/* TOP WAVE SEPARATOR (Inverted) */}
       <div className="absolute top-0 left-0 w-full overflow-hidden leading-none pointer-events-none z-10">
         <svg
@@ -58,7 +71,7 @@ export default function Contact() {
 
       {/* MAIN CONTAINER */}
       <div className="relative z-10 mx-auto px-4 sm:px-6 lg:px-8 space-y-12 my-4 pt-4">
-        
+
         {/* ================= PAGE HEADER ================= */}
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <span className="inline-flex items-center gap-1.5 text-red-600 font-bold uppercase tracking-widest text-xs bg-red-100/80 px-3.5 py-1 rounded-full border border-red-200/80 shadow-sm">
@@ -75,7 +88,7 @@ export default function Contact() {
 
         {/* ================= TWO-COLUMN MAIN CONTENT ================= */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
+
           {/* LEFT COLUMN: CONTACT INFORMATION */}
           <div className="lg:col-span-7 bg-white/90 backdrop-blur-sm p-6 sm:p-10 rounded-3xl border border-slate-200/80 shadow-xl shadow-slate-200/40 space-y-8">
             <div>
@@ -88,7 +101,7 @@ export default function Contact() {
             </div>
 
             <div className="space-y-4">
-              
+
               {/* Phone Numbers Card */}
               <div className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50/80 border border-slate-200/60 transition-all hover:bg-slate-50 hover:border-red-300">
                 <div className="w-12 h-12 bg-red-100 text-red-600 rounded-2xl flex items-center justify-center flex-shrink-0 text-lg shadow-sm">
@@ -149,7 +162,7 @@ export default function Contact() {
           {/* RIGHT COLUMN: WHATSAPP ORDERING BOX */}
           <div className="lg:col-span-5 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 text-white p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-2xl flex flex-col justify-between space-y-6">
             <div>
-              
+
               {/* Product Context Alert Banner */}
               {selectedProduct ? (
                 <div className="mb-6 p-4 bg-red-500/15 border border-red-500/30 rounded-2xl text-red-300 text-xs sm:text-sm font-semibold flex items-center gap-2">

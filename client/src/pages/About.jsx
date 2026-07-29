@@ -1,12 +1,15 @@
 import React from "react";
-import { 
-  FaCheckCircle, 
-  FaTruck, 
-  FaShieldAlt, 
-  FaAward, 
-  FaWhatsapp, 
-  FaStar 
+import {
+  FaCheckCircle,
+  FaTruck,
+  FaShieldAlt,
+  FaAward,
+  FaWhatsapp,
+  FaStar
 } from "react-icons/fa";
+
+import { Helmet } from "react-helmet-async";
+
 
 function About() {
   const phoneNumber = "60168050930";
@@ -15,8 +18,38 @@ function About() {
   )}`;
 
   return (
+
+
     <section className="relative w-full bg-gradient-to-b from-slate-50 via-red-50/20 to-amber-50/20 text-slate-900 overflow-hidden pt-14 pb-20">
-      
+
+      <Helmet>
+        <title>About SMR Chicken | Salsabeel Maju Resources (M) Sdn. Bhd.</title>
+
+        <meta
+          name="description"
+          content="Learn about SMR Chicken (Salsabeel Maju Resources), a trusted Halal supplier of fresh chicken, poultry products, and frozen seafood serving retail and wholesale customers in Shah Alam and Selangor."
+        />
+
+        <meta
+          name="keywords"
+          content="About SMR Chicken, Salsabeel Maju Resources, poultry supplier Malaysia, Halal chicken Shah Alam, frozen seafood supplier Selangor"
+        />
+
+        <link rel="canonical" href="https://smrchicken.com/about" />
+
+
+        <meta property="og:title" content="SMR Chicken" />
+        <meta
+          property="og:description"
+          content="Fresh chicken and frozen seafood delivered daily."
+        />
+        <meta
+          property="og:image"
+          content="https://smrchicken.com/logo.png"
+        />
+      </Helmet>
+
+      {/* Page */}
       {/* TOP WAVE SEPARATOR (Inverted) */}
       <div className="absolute top-0 left-0 w-full overflow-hidden leading-none pointer-events-none z-10">
         <svg
@@ -41,7 +74,7 @@ function About() {
 
       {/* MAIN CONTAINER */}
       <div className="relative z-10 mx-auto px-4 sm:px-6 lg:px-8 space-y-16 sm:space-y-24 my-4 pt-4">
-        
+
         {/* ================= HERO SECTION ================= */}
         <div className="text-center max-w-3xl mx-auto space-y-4 sm:space-y-6">
           <span className="inline-flex items-center gap-1.5 text-red-600 font-bold uppercase tracking-widest text-xs sm:text-sm bg-red-100/80 px-4 py-1.5 rounded-full border border-red-200/80 shadow-sm">
@@ -58,7 +91,7 @@ function About() {
 
         {/* ================= STORY / COMMITMENT SECTION ================= */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center bg-white/90 backdrop-blur-sm p-6 sm:p-10 lg:p-12 rounded-3xl border border-slate-200/80 shadow-xl shadow-slate-200/40">
-          
+
           {/* Left Text Column */}
           <div className="lg:col-span-7 space-y-6">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">

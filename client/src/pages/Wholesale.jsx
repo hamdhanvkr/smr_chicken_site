@@ -1,5 +1,6 @@
 import React from "react";
 import { FaTruck, FaShieldAlt, FaBoxes, FaTags, FaCheckCircle } from "react-icons/fa";
+import { Helmet } from "react-helmet-async";
 
 function Wholesale() {
     const phoneNumber = "60168050930";
@@ -45,6 +46,35 @@ function Wholesale() {
 
     return (
         <section className="relative w-full bg-slate-50 min-h-screen pt-14 pb-10 md:pb-16 overflow-hidden">
+            
+            <Helmet>
+                <title>Wholesale Chicken Supplier in Shah Alam | SMR Chicken</title>
+
+                <meta
+                    name="description"
+                    content="SMR Chicken supplies fresh Halal chicken, poultry cuts, and frozen seafood in bulk for restaurants, hotels, caterers, supermarkets, and food businesses across Shah Alam and Selangor."
+                />
+
+                <meta
+                    name="keywords"
+                    content="wholesale chicken supplier Shah Alam, bulk poultry supplier Selangor, Halal chicken wholesale Malaysia, frozen seafood wholesale, restaurant chicken supplier, hotel poultry supplier, SMR Chicken"
+                />
+
+                <link
+                    rel="canonical"
+                    href="https://smrchicken.com/wholesale"
+                />
+
+                <meta property="og:type" content="website" />
+                <meta
+                    property="og:title"
+                    content="Wholesale Fresh Chicken Supplier | SMR Chicken"
+                />
+                <meta
+                    property="og:description"
+                    content="Bulk supply of fresh Halal chicken and frozen seafood for restaurants, hotels, caterers, supermarkets, and food businesses."
+                />
+            </Helmet>
             {/* TOP WAVE SEPARATOR */}
             <div className="absolute top-0 left-0 w-full overflow-hidden leading-none pointer-events-none z-10">
                 <svg

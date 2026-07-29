@@ -44,10 +44,10 @@ const adminBuildPath = path.join(__dirname, "../public/admin/dist");
 app.use(express.static(clientBuildPath));
 
 // Admin
-app.use("/admin", express.static(adminBuildPath));
+app.use("/adminportal", express.static(adminBuildPath));
 
 // Admin React
-app.get("/admin/*", (req, res) => {
+app.get("/adminportal/*", (req, res) => {
     res.sendFile(path.join(adminBuildPath, "index.html"));
 });
 

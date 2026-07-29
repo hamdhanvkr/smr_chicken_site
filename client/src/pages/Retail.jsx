@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
 import {
   FaStore,
   FaShoppingBag,
@@ -58,6 +59,34 @@ function Retail() {
 
   return (
     <section className="relative w-full bg-slate-50 min-h-screen pt-14 pb-10 md:pb-16 overflow-hidden">
+      <Helmet>
+        <title>Retail Fresh Chicken & Seafood Shop in Shah Alam | SMR Chicken</title>
+
+        <meta
+          name="description"
+          content="Buy fresh Halal chicken, poultry cuts, and frozen seafood for your family from SMR Chicken in Shah Alam. Quality products with daily freshness and convenient service."
+        />
+
+        <meta
+          name="keywords"
+          content="retail chicken shop Shah Alam, fresh chicken Selangor, Halal poultry Malaysia, fresh seafood shop, chicken home cooking, SMR Chicken"
+        />
+
+        <link
+          rel="canonical"
+          href="https://smrchicken.com/retail"
+        />
+
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:title"
+          content="Retail Fresh Chicken Shop | SMR Chicken"
+        />
+        <meta
+          property="og:description"
+          content="Fresh Halal chicken, poultry cuts, and frozen seafood for households in Shah Alam and Selangor."
+        />
+      </Helmet>
       {/* TOP WAVE SEPARATOR */}
       <div className="absolute top-0 left-0 w-full overflow-hidden leading-none pointer-events-none z-10">
         <svg
@@ -74,7 +103,7 @@ function Retail() {
       </div>
 
       <div className="relative z-10 mx-auto px-4 sm:px-6 lg:px-8 pt-4">
-        
+
         {/* HERO BANNER SECTION (Matches Wholesale dark background style) */}
         <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-red-950 text-white rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden mb-12">
           <div className="relative z-10 max-w-2xl">
