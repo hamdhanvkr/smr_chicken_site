@@ -10,12 +10,11 @@ function Home() {
 
         <>
             <Helmet>
-                <title>SMR Chicken | Fresh Chicken & Frozen Seafood Supplier in Shah Alam</title>
+                
+                <title>SMR Chicken Malaysia | Fresh Poultry & Frozen Seafood Supplier in Shah Alam, Selangor</title>
+                <meta name="description"
+                    content="Salsabeel Maju Resources (SMR Chicken) is a trusted wholesale and retail supplier of fresh chicken, poultry products, and frozen seafood in Shah Alam, Selangor, Malaysia. Halal quality with reliable daily delivery across Malaysia." />
 
-                <meta
-                    name="description"
-                    content="SMR Chicken supplies fresh chicken, poultry parts and frozen seafood in Shah Alam and Selangor. Halal certified with retail and wholesale delivery."
-                />
 
                 <meta
                     name="keywords"
