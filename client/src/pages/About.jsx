@@ -23,11 +23,11 @@ function About() {
     <section className="relative w-full bg-gradient-to-b from-slate-50 via-red-50/20 to-amber-50/20 text-slate-900 overflow-hidden pt-14 pb-20">
 
       <Helmet>
-        <title>About SMR Chicken | Salsabeel Maju Resources (M) Sdn. Bhd.</title>
+        <title>About Us | Salsabeel Maju Resources (M) Sdn. Bhd.</title>
 
         <meta
           name="description"
-          content="Learn about SMR Chicken (Salsabeel Maju Resources), a trusted Halal supplier of fresh chicken, poultry products, and frozen seafood serving retail and wholesale customers in Shah Alam and Selangor."
+          content="Learn about Salsabeel Maju Resources, the company behind SMR Chicken Malaysia and our commitment to supplying quality Halal poultry and frozen seafood."
         />
 
         <meta
