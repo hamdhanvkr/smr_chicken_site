@@ -5,5 +5,6 @@ export const API_URL =
 
 export const IMAGE_URL =
     window.location.hostname === "localhost"
-        ? "http://localhost:5000/uploads"
+        // ? "http://localhost:5000/uploads"
+        ? "https://smrchicken.com/uploads"
         : "/uploads";
