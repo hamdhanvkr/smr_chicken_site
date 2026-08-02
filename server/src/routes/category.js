@@ -67,15 +67,15 @@ router.post(
         }
         catch (error) {
 
-            console.log(error);
+            console.error("CATEGORY UPLOAD ERROR:", error);
 
             res.status(500).json({
-                message: error.message
+                success: false,
+                message: error.message,
+                stack: error.stack
             });
 
-
         }
-
 
     });
 
