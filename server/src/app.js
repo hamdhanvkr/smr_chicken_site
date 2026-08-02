@@ -19,11 +19,8 @@ app.use(express.json());
 // ===========================
 // Static Uploads
 // ===========================
-const uploadsPath = path.join(__dirname, "../uploads");
+app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
-console.log("Uploads folder:", uploadsPath);
-
-app.use("/uploads", express.static(uploadsPath));
 // ===========================
 // API Routes
 // ===========================
@@ -45,7 +42,6 @@ const adminBuildPath = path.join(__dirname, "../public/admin/dist");
 
 // Client
 app.use(express.static(clientBuildPath));
-
 
 // Admin
 app.use("/adminportal", express.static(adminBuildPath));
