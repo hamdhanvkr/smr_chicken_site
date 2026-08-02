@@ -92,7 +92,7 @@ function Login() {
             <div className="relative flex items-center group">
               <FaEnvelope className="absolute left-4 text-slate-400 group-focus-within:text-red-600 transition-colors text-sm pointer-events-none" />
               <input
-                type="email"
+                type="text"
                 placeholder="admin@salsabeel.com"
                 required
                 className="w-full bg-slate-50/50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm rounded-xl pl-11 pr-4 py-3.5 outline-none focus:bg-white focus:border-red-600 focus:ring-4 focus:ring-red-600/10 transition-all duration-200 font-medium"
