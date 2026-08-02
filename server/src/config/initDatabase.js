@@ -3,6 +3,18 @@ const pool = require("./database");
 async function initDatabase() {
     try {
 
+
+
+
+        await pool.query(`
+           CREATE TABLE IF NOT EXISTS categories (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    status ENUM('Active','Inactive') DEFAULT 'Active',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+        `);
+
         await pool.query(`
            CREATE TABLE IF NOT EXISTS products (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -22,16 +34,6 @@ async function initDatabase() {
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
     FOREIGN KEY (category_id) REFERENCES categories(id)
-);
-        `);
-
-
-        await pool.query(`
-           CREATE TABLE IF NOT EXISTS categories (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    status ENUM('Active','Inactive') DEFAULT 'Active',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
         `);
 

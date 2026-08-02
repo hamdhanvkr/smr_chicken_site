@@ -19,8 +19,11 @@ app.use(express.json());
 // ===========================
 // Static Uploads
 // ===========================
-app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
+const uploadsPath = path.join(__dirname, "../uploads");
 
+console.log("Uploads folder:", uploadsPath);
+
+app.use("/uploads", express.static(uploadsPath));
 // ===========================
 // API Routes
 // ===========================

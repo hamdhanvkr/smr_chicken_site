@@ -285,9 +285,12 @@ function EditProduct() {
                                     <div className="space-y-4">
                                         <div className="relative w-full h-44 sm:h-52 rounded-xl overflow-hidden bg-slate-100 mx-auto shadow-inner border border-slate-200">
                                             <img
-                                                src={previewUrl || existingImageUrl}
+                                                src={
+                                                    previewUrl
+                                                        ? previewUrl
+                                                        : existingImageUrl
+                                                }
                                                 alt="Product Preview"
-                                                className="w-full h-full object-cover"
                                             />
                                             {previewUrl && (
                                                 <button

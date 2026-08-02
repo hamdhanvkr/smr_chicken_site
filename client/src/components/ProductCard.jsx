@@ -26,6 +26,7 @@ function ProductCard() {
         fetchProducts();
     }, []);
 
+
     return (
         <section className="relative w-full bg-gradient-to-b from-slate-50 via-red-50/20 to-amber-50/20 text-slate-900 overflow-hidden pt-12 pb-16">
             {/* TOP WAVE SEPARATOR (Inverted) */}

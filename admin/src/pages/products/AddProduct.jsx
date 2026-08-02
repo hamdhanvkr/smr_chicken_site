@@ -66,8 +66,11 @@ function AddProduct() {
         data.append("image", formData.image);
       }
 
-      await api.post("/products", data);
-      navigate("/products");
+      await api.post("/products", data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }); navigate("/products");
     } catch (error) {
       console.error("Failed to add product:", error);
       alert("Creation failed. Please try again.");
@@ -88,7 +91,7 @@ function AddProduct() {
   return (
     <div className="p-4 sm:p-6 lg:p-8 bg-slate-50 min-h-screen text-slate-800">
       <div className="mx-auto space-y-6">
-        
+
         {/* HEADER SECTION */}
         <div className="flex items-center justify-between bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
           <div className="flex items-center gap-4">
@@ -117,7 +120,7 @@ function AddProduct() {
           className="bg-white border border-slate-200/80 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
+
             {/* PRODUCT NAME */}
             <div>
               <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
