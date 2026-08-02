@@ -46,6 +46,17 @@ const adminBuildPath = path.join(__dirname, "../public/admin/dist");
 // Client
 app.use(express.static(clientBuildPath));
 
+// Serve sitemap.xml
+app.get("/sitemap.xml", (req, res) => {
+    res.sendFile(path.join(clientBuildPath, "sitemap.xml"));
+});
+
+// Serve robots.txt
+app.get("/robots.txt", (req, res) => {
+    res.sendFile(path.join(clientBuildPath, "robots.txt"));
+});
+
+
 // Admin
 app.use("/adminportal", express.static(adminBuildPath));
 
