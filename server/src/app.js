@@ -17,7 +17,7 @@ app.use(cors({
 app.use(express.json());
 
 // ===========================
-// Static Upload
+// Static Uploads
 // ===========================
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
