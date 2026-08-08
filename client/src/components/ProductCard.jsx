@@ -15,7 +15,13 @@ function ProductCard() {
         async function fetchProducts() {
             try {
                 const res = await api.get("/products");
-                setProducts(res.data.slice(0, 10));
+
+                const activeProducts = res.data.filter(
+                    (product) =>
+                        String(product.status).toLowerCase() === "active"
+                );
+
+                setProducts(activeProducts.slice(0, 10));
             } catch (error) {
                 console.log(error);
             } finally {

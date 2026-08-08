@@ -40,16 +40,27 @@ function Products() {
 
     // Filter logic based on Category tab and URL Search Query
     const filteredProducts = products.filter((product) => {
-        const matchesCategory =
-            selectedCategory === "All" ||
-            product.category_name?.toLowerCase() === selectedCategory.toLowerCase();
 
-        const matchesSearch = product.name
-            .toLowerCase()
+    // Only show Active products on frontend
+    const isActive =
+        String(product.status).toLowerCase() === "active";
+
+    const matchesCategory =
+        selectedCategory === "All" ||
+        product.category_name?.toLowerCase() ===
+            selectedCategory.toLowerCase();
+
+    const matchesSearch =
+        product.name
+            ?.toLowerCase()
             .includes(searchQuery.toLowerCase());
 
-        return matchesCategory && matchesSearch;
-    });
+    return (
+        isActive &&
+        matchesCategory &&
+        matchesSearch
+    );
+});
 
     return (
         <section className="relative w-full bg-slate-50 min-h-screen pt-14 pb-10 md:pb-16 overflow-hidden">

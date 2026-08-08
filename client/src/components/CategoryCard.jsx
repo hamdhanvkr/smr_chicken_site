@@ -10,7 +10,13 @@ function CategoryCard() {
         async function fetchCategories() {
             try {
                 const res = await api.get("/categories");
-                setCategories(res.data);
+
+                const activeCategories = res.data.filter(
+                    (category) =>
+                        String(category.status).toLowerCase() === "active"
+                );
+
+                setCategories(activeCategories);
             } catch (error) {
                 console.log(error);
             } finally {
@@ -56,6 +62,12 @@ function CategoryCard() {
                                 <div className="h-4 bg-slate-200 rounded w-2/3" />
                             </div>
                         ))}
+                    </div>
+                ) : categories.length === 0 ? (
+                    <div className="text-center py-12 bg-white/80 backdrop-blur-sm rounded-3xl border border-slate-200/80 shadow-sm">
+                        <p className="text-slate-500 font-medium">
+                            No fresh category available right now.
+                        </p>
                     </div>
                 ) : (
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-6">

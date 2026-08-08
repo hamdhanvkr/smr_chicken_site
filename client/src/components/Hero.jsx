@@ -30,7 +30,13 @@ function Hero() {
                 const res = await api.get("/products");
 
                 if (Array.isArray(res.data)) {
-                    setProducts(res.data.slice(0, 4));
+
+                    const activeProducts = res.data.filter(
+                        (product) =>
+                            String(product.status).toLowerCase() === "active"
+                    );
+
+                    setProducts(activeProducts.slice(0, 4));
                 }
             } catch (err) {
                 console.log(err);
@@ -188,8 +194,10 @@ function Hero() {
                                         </div>
                                     </div>
                                 ) : products.length === 0 ? (
-                                    <div className="text-center py-10 text-slate-500 text-sm">
-                                        No products found in backend stock list.
+                                   <div className="text-center py-12 bg-white/80 backdrop-blur-sm rounded-3xl border border-slate-200/80 shadow-sm">
+                                        <p className="text-slate-500 font-medium">
+                                            No products found in stock now.
+                                        </p>
                                     </div>
                                 ) : (
                                     /* Main Interactive Grid */
@@ -201,7 +209,7 @@ function Hero() {
                                                 src={`${IMAGE_URL}/${activeProduct?.image}`}
                                                 alt={activeProduct?.name || "Fresh Product"}
                                                 onError={(e) => {
-                                                   e.target.src = "/no-image.png";
+                                                    e.target.src = "/no-image.png";
                                                 }}
                                                 className="w-full h-full object-contain transition-all duration-500 ease-out transform group-hover:scale-105"
                                             />
@@ -253,8 +261,8 @@ function Hero() {
                                                                 key={product.id || idx}
                                                                 onClick={() => setCurrentImgIndex(idx)}
                                                                 className={`cursor-pointer transition-colors ${isSelected
-                                                                        ? "bg-red-50/90 font-bold"
-                                                                        : "hover:bg-slate-50"
+                                                                    ? "bg-red-50/90 font-bold"
+                                                                    : "hover:bg-slate-50"
                                                                     }`}
                                                             >
                                                                 <td className="py-2.5 px-2">

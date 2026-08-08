@@ -194,7 +194,6 @@ function AddProduct() {
               >
                 <option value="Active">Active</option>
                 <option value="Inactive">Inactive</option>
-                <option value="Out of Stock">Out of Stock</option>
               </select>
             </div>
           </div>
