@@ -66,7 +66,7 @@ function Home() {
                     </svg>
                 </div>
                 <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                    About SMR Chicken
+                    About SMR Chicken 
                 </h2>
 
                 <p className="text-gray-600 leading-8 mt-4 text-justify">
