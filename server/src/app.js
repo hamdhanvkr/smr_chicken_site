@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 
+const uploadsPath = require("./config/uploads");
+
 const app = express();
 
 app.use(cors({
@@ -16,19 +18,20 @@ app.use(cors({
 
 app.use(express.json());
 
-// ====================================
-// Uploads Folder
-// ====================================
+// ===========================
+// Static Uploads
+// ===========================
 
-const uploadPath = path.resolve(process.cwd(), "uploads");
+console.log("Serving uploads from:", uploadsPath);
 
-console.log("Uploads Path:", uploadPath);
+app.use(
+    "/uploads",
+    express.static(uploadsPath)
+);
 
-app.use("/uploads", express.static(uploadPath));
-
-// ====================================
+// ===========================
 // API Routes
-// ====================================
+// ===========================
 
 const adminRoutes = require("./routes/admin");
 const categoryRoutes = require("./routes/category");
@@ -40,23 +43,55 @@ app.use("/api/categories", categoryRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
 
-// ====================================
-// React Build
-// ====================================
+// ===========================
+// React Build Paths
+// ===========================
 
-const clientBuildPath = path.join(process.cwd(), "public/client/dist");
-const adminBuildPath = path.join(process.cwd(), "public/admin/dist");
+const clientBuildPath =
+    path.join(__dirname, "../public/client/dist");
 
-app.use(express.static(clientBuildPath));
+const adminBuildPath =
+    path.join(__dirname, "../public/admin/dist");
 
-app.use("/adminportal", express.static(adminBuildPath));
+// ===========================
+// Client
+// ===========================
+
+app.use(
+    express.static(clientBuildPath)
+);
+
+// ===========================
+// Admin
+// ===========================
+
+app.use(
+    "/adminportal",
+    express.static(adminBuildPath)
+);
+
+// ===========================
+// Admin React
+// ===========================
 
 app.get("/adminportal/*", (req, res) => {
-    res.sendFile(path.join(adminBuildPath, "index.html"));
+
+    res.sendFile(
+        path.join(adminBuildPath, "index.html")
+    );
+
 });
 
+// ===========================
+// Client React
+// ===========================
+
 app.get("*", (req, res) => {
-    res.sendFile(path.join(clientBuildPath, "index.html"));
+
+    res.sendFile(
+        path.join(clientBuildPath, "index.html")
+    );
+
 });
 
 module.exports = app;
